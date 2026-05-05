@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: goat-conut-ai
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 1 --timeout 120 --bind 0.0.0.0:$PORT
+    envVars:
+      - key: ROBOFLOW_API_KEY
+        sync: false          # lo ingresas manualmente en el dashboard de Render
+      - key: ROBOFLOW_MODEL
+        value: goat-looker/1
+      - key: ROBOFLOW_WORKSPACE
+        value: brookside-research
+      - key: PYTHON_VERSION
+        value: 3.11.0
